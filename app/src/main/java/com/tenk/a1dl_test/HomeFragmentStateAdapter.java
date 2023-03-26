@@ -22,8 +22,10 @@ public class HomeFragmentStateAdapter extends FragmentStateAdapter {
             case 0:
                 return new TestListFragment();
             case 1:
-                return new SignalListFragment();
+                return new TrafficSignalFragment();
             case 2:
+                return new TrafficLawFragment();
+            case 3:
                 return new InfoFragment();
             default:
                 return null;
@@ -32,6 +34,6 @@ public class HomeFragmentStateAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }
