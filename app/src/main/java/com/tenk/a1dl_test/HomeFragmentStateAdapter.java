@@ -17,7 +17,6 @@ public class HomeFragmentStateAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        System.out.println(position);
         switch (position) {
             case 0:
                 return new TestListFragment();
