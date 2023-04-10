@@ -5,6 +5,7 @@ import java.util.List;
 
 public class TestStore {
     private List<Question> questions;
+    private Boolean isSubmitted;
 
     private static TestStore instance;
 
@@ -25,4 +26,11 @@ public class TestStore {
         this.questions = questions;
     }
 
+    public Boolean getSubmitted() {
+        return isSubmitted;
+    }
+
+    public void setSubmitted(Boolean submitted) {
+        isSubmitted = submitted;
+    }
 }

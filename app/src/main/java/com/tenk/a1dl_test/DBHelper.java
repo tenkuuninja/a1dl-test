@@ -35,23 +35,32 @@ public class DBHelper extends SQLiteAssetHelper {
             question.setOrder(res.getInt(res.getColumnIndex("order")));
             question.setText(res.getString(res.getColumnIndex("text")));
             question.setImage(res.getString(res.getColumnIndex("image")));
+            question.setCritical(res.getInt(res.getColumnIndex("critical")) == 1);
+            question.setExplain(res.getString(res.getColumnIndex("explain")));
 
             Cursor ansRes =  db.rawQuery( "select * from answers where questionId = " + question.getId(), null );
             ansRes.moveToFirst();
             List<Answer> answers = new ArrayList<>();
+
+            int ansIndex = 0;
             while(ansRes.isAfterLast() == false) {
                 Answer answer = new Answer();
                 answer.setId(ansRes.getInt(ansRes.getColumnIndex("id")));
                 answer.setText(ansRes.getString(ansRes.getColumnIndex("text")));
                 answer.setCorrect(ansRes.getInt(ansRes.getColumnIndex("correct")) == 1 ? true : false);
+                if (answer.getCorrect()) {
+                    question.setCorrectAnswerIndex(ansIndex);
+                }
                 answers.add(answer);
                 ansRes.moveToNext();
+                ansIndex++;
             }
             question.setAnswers(answers);
 
             questions.add(question);
             res.moveToNext();
         }
+        db.close();
         return questions;
     }
 }

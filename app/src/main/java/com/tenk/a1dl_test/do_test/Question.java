@@ -13,9 +13,11 @@ public class Question implements Serializable {
     private String explain;
     private Boolean critical;
     private List<Answer> answers;
+    private Integer correctAnswerIndex;
     private Integer selectionIndex;
 
     public Question() {
+        selectionIndex = -1;
     }
 
     public Question(Integer id, Integer topicId, Integer testId, Integer order, String text, String image, String explain, Boolean critical) {
@@ -27,6 +29,7 @@ public class Question implements Serializable {
         this.image = image;
         this.explain = explain;
         this.critical = critical;
+        selectionIndex = -1;
     }
 
     public Integer getId() {
@@ -99,6 +102,14 @@ public class Question implements Serializable {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public Integer getCorrectAnswerIndex() {
+        return correctAnswerIndex;
+    }
+
+    public void setCorrectAnswerIndex(Integer correctAnswerIndex) {
+        this.correctAnswerIndex = correctAnswerIndex;
     }
 
     public Integer getSelectionIndex() {
