@@ -1,4 +1,4 @@
-package com.tenk.a1dl_test;
+package com.tenk.a1dl_test.information_signal;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.tenk.a1dl_test.R;
 
 public class TrafficSignalFragment extends Fragment {
 
