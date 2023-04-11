@@ -2,6 +2,7 @@ package com.tenk.a1dl_test.information_signal;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -27,9 +28,9 @@ public class SignalActivity extends AppCompatActivity {
     String DB_NAME = "a1dl-v2.db ";
     private String DB_PATH ="/databases/";
     private Object myOutPut;
-    private Object databases;
+    private Object database;
 
-    //    SQLiteDatabase database = null;
+    SQLiteDatabase database1 = null;
     @Override
     protected void onCreate (Bundle saveInstanceState) {
 
@@ -44,8 +45,8 @@ public class SignalActivity extends AppCompatActivity {
     }
 
     private void showAllSignal() {
-        databases = openOrCreateDatabase(DB_NAME, MODE_PRIVATE, null);
-        Cursor cursor = databases.query("a1dl-v2", null, null, null, null);
+        database = openOrCreateDatabase(DB_NAME, MODE_PRIVATE, null);
+        Cursor cursor = database1.query("signals", null, null, null, null, null, null);
 
         arrBienBao.clear();
         while (cursor.moveToNext()){
@@ -59,6 +60,7 @@ public class SignalActivity extends AppCompatActivity {
         adapterBB.notifyDataSetChanged();
 
     }
+
 
     private void xyLySaoChepCSDL() {
         File dbFile = getDatabasePath(DB_NAME);
