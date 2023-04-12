@@ -100,4 +100,8 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="fragments">
+        <item>Fragment one</item>
+        <item>Fragment Two</item>
+    </string-array>
 </resources>

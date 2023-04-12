@@ -19,7 +19,8 @@ public class HomeFragmentStateAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new TestListFragment();
+                return new TrafficLawFragment();
+//                return new TestListFragment();
             case 1:
                 return new TrafficSignalFragment();
             case 2:
