@@ -70,18 +70,20 @@ public class DBHelper extends SQLiteAssetHelper {
         Cursor res =  db.rawQuery( "select id, topicId, title, description, image from signals", null );
         res.moveToFirst();
         while(res.isAfterLast() == false){
-            System.out.println(res.getInt(res.getColumnIndex("title")));
+            System.out.println(res.getString(res.getColumnIndex("title")));
+            res.moveToNext();
         }
         db.close();
     }
 
     @SuppressLint("Range")
-    public void getListLaw() {
+    public void getListLaw(int topicId, int vehCode) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select id, topicId, vehicleCode, violation, entities, penalties, additionalPenalties, remedial, note from laws", null );
+        Cursor res =  db.rawQuery( "select id, topicId, vehicleCode, violation, entities, penalties, additionalPenalties, remedial, note from laws where topicId = " + topicId + " and vehicleCode = " + vehCode, null );
         res.moveToFirst();
         while(res.isAfterLast() == false){
-            System.out.println(res.getInt(res.getColumnIndex("violation")));
+            System.out.println(res.getString(res.getColumnIndex("violation")));
+            res.moveToNext();
         }
         db.close();
     }
