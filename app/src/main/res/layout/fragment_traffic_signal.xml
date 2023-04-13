@@ -15,7 +15,9 @@
         <ListView
             android:id="@+id/lv_signal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="-65dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

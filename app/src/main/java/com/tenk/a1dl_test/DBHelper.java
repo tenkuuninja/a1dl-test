@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DBHelper extends SQLiteAssetHelper {
-    public static final String DATABASE_NAME = "a1dl-v2.db";
+    public static final String DATABASE_NAME = "a1dl-v3.db";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME , null, 1);
@@ -63,15 +63,23 @@ public class DBHelper extends SQLiteAssetHelper {
         db.close();
         return questions;
     }
-
     @SuppressLint("Range")
-    public void getListSignal() {
+    public List<List<String>> getListLaw(int topicId, int vehCode) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select id, topicId, title, description, image from signals", null );
         res.moveToFirst();
+
+        List<List<String>> l = new ArrayList<>();
         while(res.isAfterLast() == false){
-            System.out.println(res.getInt(res.getColumnIndex("title")));
+            List<String> r = new ArrayList<>();
+            r.add(res.getString(res.getColumnIndex("topicId")));
+            r.add(res.getString(res.getColumnIndex("title")));
+            r.add(res.getString(res.getColumnIndex("description")));
+            r.add(res.getString(res.getColumnIndex("image")));
+            l.add(r);
+            res.moveToNext();
         }
         db.close();
+        return l;
     }
 }
