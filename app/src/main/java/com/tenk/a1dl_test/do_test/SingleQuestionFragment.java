@@ -67,7 +67,11 @@ public class SingleQuestionFragment extends Fragment {
         ansGroup = view.findViewById(R.id.q_ans_group);
         tvExplain = view.findViewById(R.id.q_explain);
 
-        tvIndex.setText("Câu hỏi " + question.getOrder());
+        if (TestStore.getInstance().getSubmitted() && question.getCritical()) {
+            tvIndex.setText("Câu hỏi " + question.getOrder() + " (Câu điểm liệt)");
+        } else {
+            tvIndex.setText("Câu hỏi " + question.getOrder());
+        }
         tvQuestion.setText(question.getText());
 
         if (question.getImage().length() != 0) {
@@ -82,11 +86,11 @@ public class SingleQuestionFragment extends Fragment {
             if (TestStore.getInstance().getSubmitted()) {
                 rb.setEnabled(false);
                 if (question.getSelectionIndex() == i) {
-                    rb.setTextColor(Color.parseColor("#dddddd"));
+                    rb.setTextColor(Color.parseColor("#eb4d4b"));
                     rb.setChecked(true);
                 }
                 if (question.getCorrectAnswerIndex() == i) {
-                    rb.setTextColor(Color.parseColor("#33dddd"));
+                    rb.setTextColor(Color.parseColor("#6ab04c"));
                 }
             }
             ansGroup.addView(rb);
@@ -104,7 +108,7 @@ public class SingleQuestionFragment extends Fragment {
         });
 
         if (TestStore.getInstance().getSubmitted()) {
-            tvExplain.setText(question.getExplain());
+            tvExplain.setText("Giải thích: " + question.getExplain());
         } else {
             tvExplain.setText("");
         }

@@ -120,7 +120,7 @@ public class DoTestActivity extends AppCompatActivity {
             })
             .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    countDownTimer.onFinish();
+                    countDownTimer.cancel();
                     showResultDialog();
                 }
             })
@@ -143,12 +143,12 @@ public class DoTestActivity extends AppCompatActivity {
                 break;
             }
         }
-        if (isFailByCritical) {
-            title = "Không đạt";
-            message = "Bạn không đạt do sai câu điểm liệt";
-        } else if (points < 21) {
+        if (points < 21) {
             title = "Không đạt";
             message = "Bạn không đạt do không đủ điểm\nĐiểm của bạn là " + points + "/25\nBạn cần tối thiểu 21 điểm";
+        } else if (isFailByCritical) {
+            title = "Không đạt";
+            message = "Bạn không đạt do sai câu điểm liệt";
         } else {
             title = "Đạt";
             message = "Bạn đã vượt qua bài thi";
