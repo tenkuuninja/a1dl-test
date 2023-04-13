@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
@@ -13,7 +15,9 @@ import androidx.annotation.Nullable;
 import com.google.android.material.button.MaterialButton;
 import com.tenk.a1dl_test.do_test.Answer;
 import com.tenk.a1dl_test.do_test.DoTestActivity;
+import com.tenk.a1dl_test.do_test.ListTestAdapter;
 import com.tenk.a1dl_test.do_test.Question;
+import com.tenk.a1dl_test.information_signal.Signal_Adapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +31,10 @@ public class TestListFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_test_list, container, false);
 
-        MaterialButton btn = view.findViewById(R.id.btn_test_1);
-        btn.setOnClickListener(new View.OnClickListener() {
+        ListTestAdapter listTestAdapter = new ListTestAdapter(this);
 
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), DoTestActivity.class);
-                startActivity(i);
-            }
-        });
-
+        ListView listView = view.findViewById(R.id.t_listview);
+        listView.setAdapter(listTestAdapter);
 
         return view;
     }

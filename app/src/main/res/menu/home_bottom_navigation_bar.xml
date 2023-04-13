@@ -8,16 +8,16 @@
     <item
         android:id="@+id/pager_2"
         android:enabled="true"
-        android:icon="@drawable/selection_lightbulb_24"
+        android:icon="@drawable/selection_signpost_24"
         android:title="Biển báo"/>
     <item
         android:id="@+id/pager_3"
         android:enabled="true"
-        android:icon="@drawable/selection_lightbulb_24"
+        android:icon="@drawable/selection_text_snippet_24"
         android:title="Luật"/>
     <item
         android:id="@+id/pager_4"
         android:enabled="true"
-        android:icon="@drawable/selection_lightbulb_24"
+        android:icon="@drawable/selection_info_24"
         android:title="Thôngtin"/>
 </menu>

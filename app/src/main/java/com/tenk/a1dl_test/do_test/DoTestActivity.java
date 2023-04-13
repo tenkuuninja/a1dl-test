@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -28,12 +29,12 @@ public class DoTestActivity extends AppCompatActivity {
     ViewPager2 viewPager;
 
     DBHelper db;
+    CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_do_test);
-
 
         TestStore.getInstance().setSubmitted(false);
 
@@ -64,8 +65,11 @@ public class DoTestActivity extends AppCompatActivity {
             }
         });
 
+        Bundle extras = getIntent().getExtras();
+        Integer testId = extras.getInt("testId");
+
         db = new DBHelper(this);
-        List<Question> questions =  db.getListQuestionByTestId(1);
+        List<Question> questions =  db.getListQuestionByTestId(testId);
         TestStore.getInstance().setQuestions(questions);
 
         viewPager = (ViewPager2) findViewById(R.id.test_pager);
@@ -81,19 +85,42 @@ public class DoTestActivity extends AppCompatActivity {
             }
         });
 
+
+
+        TextView tvCountDown = findViewById(R.id.count_down);
+        int time = 19 * 60 * 1000;
+        countDownTimer = new CountDownTimer(time, 1000) {
+            public void onTick(long millisUntilFinished) {
+                long totalSeconds = millisUntilFinished / 1000;
+                long m = totalSeconds / 60;
+                long s = totalSeconds % 60;
+                tvCountDown.setText(String.format("%02d:%02d", m, s));
+            }
+            public void onFinish() {
+                tvCountDown.setText("00:00");
+                showOverTimeDialog();
+            }
+        };
+
+        countDownTimer.start();
+
     }
 
     private void showConfirmSubmitDialog() {
+        if(isFinishing()) {
+            return;
+        }
         new MaterialAlertDialogBuilder(DoTestActivity.this)
             .setTitle("Xác nhận nộp")
             .setMessage("Bạn có muốn nộp không?")
-            .setNegativeButton(R.string.app_name, new DialogInterface.OnClickListener() {
+            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
 
                 }
             })
-            .setPositiveButton(R.string.app_name, new DialogInterface.OnClickListener() {
+            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
+                    countDownTimer.onFinish();
                     showResultDialog();
                 }
             })
@@ -101,6 +128,9 @@ public class DoTestActivity extends AppCompatActivity {
     }
 
     private void showResultDialog() {
+        if(isFinishing()) {
+            return;
+        }
         int points = 0;
         String title = "";
         String message = "";
@@ -126,7 +156,13 @@ public class DoTestActivity extends AppCompatActivity {
         new MaterialAlertDialogBuilder(DoTestActivity.this)
             .setTitle(title)
             .setMessage(message)
-            .setNegativeButton(R.string.app_name, new DialogInterface.OnClickListener() {
+            .setCancelable(false)
+            .setNegativeButton(R.string.back_to_home, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    finish();
+                }
+            })
+            .setPositiveButton(R.string.show_result, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     TestStore.getInstance().setSubmitted(true);
                     int currentPage = viewPager.getCurrentItem();
@@ -134,12 +170,23 @@ public class DoTestActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(currentPage, false);
                 }
             })
-            .setPositiveButton(R.string.app_name, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    finish();
-                }
-            })
             .show();
+    }
+
+    private void showOverTimeDialog() {
+        if(isFinishing()) {
+            return;
+        }
+        new MaterialAlertDialogBuilder(DoTestActivity.this)
+                .setTitle("Hết giờ")
+                .setMessage("Bạn đã hết thời gian làm bài?")
+                .setCancelable(false)
+                .setPositiveButton(R.string.show_result, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        showResultDialog();
+                    }
+                })
+                .show();
     }
 
     public class TestFragmentStateAdapter extends FragmentStateAdapter {

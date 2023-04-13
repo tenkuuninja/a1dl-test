@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:rowCount="5"
     android:columnCount="5"
+    android:stretchMode="columnWidth"
     tools:context=".do_test.ModalBottomSheet">
 
 

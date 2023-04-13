@@ -5,8 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
@@ -24,19 +26,43 @@ public class TrafficSignalFragment extends Fragment {
     ListView listSignal;
     DBHelper db;
 
+    Integer topicId;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_traffic_signal, container, false);
-        db = new DBHelper(this.getContext());
-        listSignals = db.getListSignal(1, 1);
-        signal_adapter = new Signal_Adapter(listSignals);
 
+        SpinnerAdapter spinnerAdapter = new SpinnerAdapter(this.getContext());
+        Spinner spinner = view.findViewById(R.id.spn_topicId);
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                topicId = i + 1;
+                loadData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                System.out.println("Nothing");
+            }
+        });
+        spinner.setSelection(0);
+
+        db = new DBHelper(this.getContext());
+
+        return view;
+
+    }
+
+    private void loadData() {
+        listSignals = db.getListSignal(topicId);
+        signal_adapter = new Signal_Adapter(listSignals);
         listSignal = view.findViewById(R.id.lv_signal);
         listSignal.setAdapter(signal_adapter);
-        return view;
     }
 }
 

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class SingleQuestionFragment extends Fragment {
     TextView tvQuestion;
     RadioGroup ansGroup;
     TextView tvExplain;
+    Integer questionIndex;
 
     @Nullable
     @Override
@@ -52,9 +54,14 @@ public class SingleQuestionFragment extends Fragment {
 
     private void renderContent() {
 //        question = (Question) getArguments().getSerializable("question");
-        Integer qIndex = getArguments().getInt("questionIndex");
-        question = TestStore.getInstance().getQuestions().get(qIndex);
+        questionIndex = getArguments().getInt("questionIndex");
+        question = TestStore.getInstance().getQuestions().get(questionIndex);
 
+        renderQuestionInfo();
+
+    }
+
+    private void renderQuestionInfo() {
         tvIndex =  view.findViewById(R.id.q_index);
         tvQuestion =  view.findViewById(R.id.q_text);
         ansGroup = view.findViewById(R.id.q_ans_group);
@@ -90,8 +97,8 @@ public class SingleQuestionFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int ansCheckedId = ansGroup.getCheckedRadioButtonId();
                 int ansCheckedIndex = ansGroup.indexOfChild(view.findViewById(ansCheckedId));
-                System.out.println("Question " + qIndex + ", check answer " + ansCheckedIndex);
-                TestStore.getInstance().getQuestions().get(qIndex).setSelectionIndex(ansCheckedIndex);
+                System.out.println("Question " + questionIndex + ", check answer " + ansCheckedIndex);
+                TestStore.getInstance().getQuestions().get(questionIndex).setSelectionIndex(ansCheckedIndex);
 
             }
         });
