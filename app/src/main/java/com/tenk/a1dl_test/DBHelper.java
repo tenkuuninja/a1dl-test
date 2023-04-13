@@ -63,28 +63,23 @@ public class DBHelper extends SQLiteAssetHelper {
         db.close();
         return questions;
     }
-
     @SuppressLint("Range")
-    public void getListSignal() {
+    public List<List<String>> getListLaw(int topicId, int vehCode) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select id, topicId, title, description, image from signals", null );
         res.moveToFirst();
-        while(res.isAfterLast() == false){
-            System.out.println(res.getString(res.getColumnIndex("title")));
-            res.moveToNext();
-        }
-        db.close();
-    }
 
-    @SuppressLint("Range")
-    public void getListLaw(int topicId, int vehCode) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select id, topicId, vehicleCode, violation, entities, penalties, additionalPenalties, remedial, note from laws where topicId = " + topicId + " and vehicleCode = " + vehCode, null );
-        res.moveToFirst();
+        List<List<String>> l = new ArrayList<>();
         while(res.isAfterLast() == false){
-            System.out.println(res.getString(res.getColumnIndex("violation")));
+            List<String> r = new ArrayList<>();
+            r.add(res.getString(res.getColumnIndex("topicId")));
+            r.add(res.getString(res.getColumnIndex("title")));
+            r.add(res.getString(res.getColumnIndex("description")));
+            r.add(res.getString(res.getColumnIndex("image")));
+            l.add(r);
             res.moveToNext();
         }
         db.close();
+        return l;
     }
 }
