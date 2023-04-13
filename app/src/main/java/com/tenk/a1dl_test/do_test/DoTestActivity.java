@@ -8,27 +8,16 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.bottomsheet.BottomSheetDragHandleView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.tenk.a1dl_test.DBHelper;
-import com.tenk.a1dl_test.HomeActivity;
-import com.tenk.a1dl_test.HomeFragmentStateAdapter;
-import com.tenk.a1dl_test.InfoFragment;
 import com.tenk.a1dl_test.R;
-import com.tenk.a1dl_test.TestListFragment;
-import com.tenk.a1dl_test.TrafficLawFragment;
-import com.tenk.a1dl_test.TrafficSignalFragment;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DoTestActivity extends AppCompatActivity {

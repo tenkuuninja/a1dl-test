@@ -31,6 +31,7 @@ import java.util.List;
 
 public class SingleQuestionFragment extends Fragment {
 
+    View view;
     Question question;
     TextView tvIndex;
     TextView tvQuestion;
@@ -42,8 +43,14 @@ public class SingleQuestionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_single_question, container, false);
+        view = inflater.inflate(R.layout.fragment_single_question, container, false);
 
+        renderContent();
+
+        return view;
+    }
+
+    private void renderContent() {
 //        question = (Question) getArguments().getSerializable("question");
         Integer qIndex = getArguments().getInt("questionIndex");
         question = TestStore.getInstance().getQuestions().get(qIndex);
@@ -94,7 +101,5 @@ public class SingleQuestionFragment extends Fragment {
         } else {
             tvExplain.setText("");
         }
-
-        return view;
     }
 }
