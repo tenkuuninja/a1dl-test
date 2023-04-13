@@ -49,35 +49,6 @@ public class TrafficLawFragment extends Fragment {
         listView.setAdapter(viewAdapter);
 
 
-//        adapter = new ArrayAdapter<Law>(getActivity(), 0, listItem) {
-//
-//            public View getView(int position, View convertView, ViewGroup parent) {
-//                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-//                convertView = inflater.inflate(R.layout.data_listview, null);
-//
-//
-//
-//
-//
-//                TextView law_data = convertView.findViewById(R.id.law_data);
-//                TextView law_data1 = convertView.findViewById(R.id.law_data1);
-//
-//
-//                return convertView;
-//            }
-//        };
-//        listView.setAdapter(adapter)
-//      MySpinnerAdapter adapter = new MySpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item, db);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        Spinner spinner = view.findViewById(R.id.spinner);
-//        spinner.setAdapter(adapter);
-//
-//
-//
-//        MySpinnerAdapter adapter1 = new MySpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item, db);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        Spinner spinner1 = view.findViewById(R.id.spinner1);
-//        spinner.setAdapter(adapter);
 
         return view;
     }
