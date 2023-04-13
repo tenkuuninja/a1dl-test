@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.tenk.a1dl_test.information_signal.TrafficSignalFragment;
+import com.tenk.a1dl_test.law.TrafficLawFragment;
 
 public class HomeFragmentStateAdapter extends FragmentStateAdapter {
 

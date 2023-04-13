@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TrafficLawFragment">
+    tools:context=".law.TrafficLawFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -30,25 +30,38 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/logo"
-            tools:layout_editor_absoluteX="92dp"
+            tools:layout_editor_absoluteX="88dp"
             tools:layout_editor_absoluteY="0dp" />
 
-
-            <Spinner
+        <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="409dp"
                 android:layout_height="70dp"
-                app:layout_constraintTop_toBottomOf="@id/imageView"
+                android:layout_below="@id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="81dp" />
-        <FrameLayout
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="409dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="81dp" />
+
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/main_frame"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_below="@id/spinner1"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp"
+            android:id="@+id/list_law"/>
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</LinearLayout>
