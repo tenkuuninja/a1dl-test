@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ public class TestListFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_test_list, container, false);
 
-        MaterialButton btn = view.findViewById(R.id.btn_test_1);
+        Button btn = view.findViewById(R.id.btn_test_1);
         btn.setOnClickListener(new View.OnClickListener() {
 
             @Override

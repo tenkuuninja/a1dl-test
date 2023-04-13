@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ public class DoTestActivity extends AppCompatActivity {
     ViewPager2 viewPager;
 
     DBHelper db;
+    CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,21 @@ public class DoTestActivity extends AppCompatActivity {
             }
         });
 
+
+
+        TextView tvCountDown = findViewById(R.id.count_down);
+        countDownTimer = new CountDownTimer(30000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                tvCountDown.setText("" + millisUntilFinished / 1000);
+            }
+            public void onFinish() {
+                tvCountDown.setText("00:00");
+                showOverTimeDialog();
+            }
+        };
+
+        countDownTimer.start();
+
     }
 
     private void showConfirmSubmitDialog() {
@@ -126,6 +143,7 @@ public class DoTestActivity extends AppCompatActivity {
         new MaterialAlertDialogBuilder(DoTestActivity.this)
             .setTitle(title)
             .setMessage(message)
+            .setCancelable(false)
             .setNegativeButton(R.string.app_name, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     TestStore.getInstance().setSubmitted(true);
@@ -140,6 +158,19 @@ public class DoTestActivity extends AppCompatActivity {
                 }
             })
             .show();
+    }
+
+    private void showOverTimeDialog() {
+        new MaterialAlertDialogBuilder(DoTestActivity.this)
+                .setTitle("Hết giờ")
+                .setMessage("Bạn đã hết thời gian làm bài?")
+                .setCancelable(false)
+                .setPositiveButton(R.string.app_name, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        showResultDialog();
+                    }
+                })
+                .show();
     }
 
     public class TestFragmentStateAdapter extends FragmentStateAdapter {
