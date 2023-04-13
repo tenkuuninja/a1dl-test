@@ -22,6 +22,7 @@ public class SpinnerAdapter extends BaseAdapter {
         topics.add("Biển chỉ dẫn");
         topics.add("Biển báo nguy hiểm và cảnh báo");
         topics.add("Biển phụ");
+
     }
 
     @Override
@@ -43,7 +44,6 @@ public class SpinnerAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         TextView textView = new TextView(context);
         textView.setText(topics.get(i));
-
         return textView;
     }
 }

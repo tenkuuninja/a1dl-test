@@ -37,12 +37,15 @@ public class TrafficSignalFragment extends Fragment {
 
         SpinnerAdapter spinnerAdapter = new SpinnerAdapter(this.getContext());
         Spinner spinner = view.findViewById(R.id.spn_topicId);
+//        spinner.setDropDownVerticalOffset(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 topicId = i + 1;
                 loadData();
+
             }
 
             @Override
