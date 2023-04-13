@@ -40,12 +40,12 @@ public class ViewAdapter extends BaseAdapter {
 
         //Bind sữ liệu phần tử vào View
         List<String> item = (List<String>) getItem(position);
-        ((TextView) viewLaw.findViewById(R.id.law_data)).setText(String.format("violation %s:", item.get(0)));
-        ((TextView) viewLaw.findViewById(R.id.law_data1)).setText(String.format("entities %s:", item.get(1)));
-        ((TextView) viewLaw.findViewById(R.id.law_data2)).setText(String.format("penalties %s:", item.get(2)));
-        ((TextView) viewLaw.findViewById(R.id.law_data3)).setText(String.format("additionalPenalties %s:", item.get(3)));
-        ((TextView) viewLaw.findViewById(R.id.law_data4)).setText(String.format("remedial %s:", item.get(4)));
-        ((TextView) viewLaw.findViewById(R.id.law_data5)).setText(String.format("note %s:", item.get(5)));
+        ((TextView) viewLaw.findViewById(R.id.law_data)).setText(String.format("Hành vi %s:", item.get(0)));
+        ((TextView) viewLaw.findViewById(R.id.law_data1)).setText(String.format("Đối tượng %s:", item.get(1)));
+        ((TextView) viewLaw.findViewById(R.id.law_data2)).setText(String.format("Hình phạt %s:", item.get(2)));
+        ((TextView) viewLaw.findViewById(R.id.law_data3)).setText(String.format("Hình phạt bổ sung %s:", item.get(3)));
+        ((TextView) viewLaw.findViewById(R.id.law_data4)).setText(String.format("Khắc phục hậu quả %s:", item.get(4)));
+        ((TextView) viewLaw.findViewById(R.id.law_data5)).setText(String.format("Ghi chú %s:", item.get(5)));
 
         return viewLaw;
     }
