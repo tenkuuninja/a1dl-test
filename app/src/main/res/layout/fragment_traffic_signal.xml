@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".law.TrafficLawFragment">
-
     <Spinner
         android:id="@+id/spn_topicId"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         tools:ignore="MissingConstraints"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
