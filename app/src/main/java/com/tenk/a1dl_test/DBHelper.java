@@ -85,7 +85,7 @@ public class DBHelper extends SQLiteAssetHelper {
     @SuppressLint("Range")
     public List<List<String>> getListLaw(int topicId, int vehCode) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select id, topicId, vehicleCode, violation, entities, penalties, additionalPenalties, remedial, note from laws", null );
+        Cursor res =  db.rawQuery( "select id, topicId, vehicleCode, violation, entities, penalties, additionalPenalties, remedial, note from laws where topicId = " + topicId + " and vehicleCode = " + vehCode, null );
         res.moveToFirst();
 
         List<List<String>> l = new ArrayList<>();
@@ -103,4 +103,5 @@ public class DBHelper extends SQLiteAssetHelper {
         db.close();
         return l;
     }
+
 }

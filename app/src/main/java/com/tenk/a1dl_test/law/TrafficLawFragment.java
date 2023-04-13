@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -15,6 +16,8 @@ import androidx.annotation.Nullable;
 
 import com.tenk.a1dl_test.DBHelper;
 import com.tenk.a1dl_test.R;
+import com.tenk.a1dl_test.information_signal.Signal_Adapter;
+import com.tenk.a1dl_test.information_signal.SpinnerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +32,8 @@ public class TrafficLawFragment extends Fragment {
 
     ViewAdapter viewAdapter;
 
-
-//    ArrayAdapter<Law> adapter;
-//    ArrayList<Law>  listItem = new ArrayList<>();
+    Integer topicId = 1;
+    Integer vehId = 1;
 
     @Nullable
     @Override
@@ -40,46 +42,50 @@ public class TrafficLawFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_traffic_law, container, false);
 
+        Spinner topicSpinner = view.findViewById(R.id.spinner);
+        TopicSpinnerAdapter topicSpinnerAdapter = new TopicSpinnerAdapter(this.getContext());
+        topicSpinner.setAdapter(topicSpinnerAdapter);
+        topicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                topicId = i + 1;
+                loadData();
+            }
 
-        listView = view.findViewById(R.id.list_law);
-        DBHelper db = new DBHelper(getActivity());
-        List<List<String>> data = db.getListLaw(1, 1);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                System.out.println("Nothing");
+            }
+        });
+        topicSpinner.setSelection(0);
 
-        viewAdapter = new ViewAdapter(data);
-        listView.setAdapter(viewAdapter);
+        Spinner vehSpinner = view.findViewById(R.id.spinner1);
+        VehicleSpinnerAdapter vehicleSpinnerAdapter = new VehicleSpinnerAdapter(this.getContext());
+        vehSpinner.setAdapter(vehicleSpinnerAdapter);
+        vehSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                vehId = i + 1;
+                loadData();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                System.out.println("Nothing");
+            }
+        });
+        vehSpinner.setSelection(0);
 
-//        adapter = new ArrayAdapter<Law>(getActivity(), 0, listItem) {
-//
-//            public View getView(int position, View convertView, ViewGroup parent) {
-//                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-//                convertView = inflater.inflate(R.layout.data_listview, null);
-//
-//
-//
-//
-//
-//                TextView law_data = convertView.findViewById(R.id.law_data);
-//                TextView law_data1 = convertView.findViewById(R.id.law_data1);
-//
-//
-//                return convertView;
-//            }
-//        };
-//        listView.setAdapter(adapter)
-//      MySpinnerAdapter adapter = new MySpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item, db);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        Spinner spinner = view.findViewById(R.id.spinner);
-//        spinner.setAdapter(adapter);
-//
-//
-//
-//        MySpinnerAdapter adapter1 = new MySpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item, db);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        Spinner spinner1 = view.findViewById(R.id.spinner1);
-//        spinner.setAdapter(adapter);
+        db = new DBHelper(getActivity());
 
         return view;
+    }
+
+    private void loadData() {
+        List<List<String>> data = db.getListLaw(topicId, vehId);
+        viewAdapter = new ViewAdapter(data);
+        listView = view.findViewById(R.id.list_law);
+        listView.setAdapter(viewAdapter);
     }
 
 
