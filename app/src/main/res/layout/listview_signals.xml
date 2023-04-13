@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".information_signal.TrafficSignalFragment">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".do_test.SingleQuestionFragment">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/id"
+            android:id="@+id/topicID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1" />
-
-        <TextView
-            android:id="@+id/topicId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ProductName"
-            android:textStyle="bold" />
+            android:text="Nhóm biển" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1000" />
+            android:text="Tiêu đề"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/descripton"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1000" />
+            android:text="Mô tả" />
 
+        <ImageView
+            android:id="@+id/signal_image"
+            android:layout_width="372dp"
+            android:layout_height="204dp" />
     </LinearLayout>
+
+
 </androidx.core.widget.NestedScrollView>

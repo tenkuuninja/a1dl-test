@@ -19,7 +19,7 @@ public class TrafficLawFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         db = new DBHelper(getActivity());
-        db.getListLaw(1, 1);
+//        db.getListLaw(1, 1);
         return inflater.inflate(R.layout.fragment_traffic_law, container, false);
     }
 }

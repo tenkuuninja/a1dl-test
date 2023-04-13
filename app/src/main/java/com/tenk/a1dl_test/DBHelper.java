@@ -64,7 +64,7 @@ public class DBHelper extends SQLiteAssetHelper {
         return questions;
     }
     @SuppressLint("Range")
-    public List<List<String>> getListLaw(int topicId, int vehCode) {
+    public List<List<String>> getListSignal(int topicId, int title) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select id, topicId, title, description, image from signals", null );
         res.moveToFirst();

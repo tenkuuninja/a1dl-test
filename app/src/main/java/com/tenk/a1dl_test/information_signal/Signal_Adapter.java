@@ -3,8 +3,10 @@ package com.tenk.a1dl_test.information_signal;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.tenk.a1dl_test.R;
 
 import java.util.ArrayList;
@@ -41,9 +43,11 @@ public class Signal_Adapter extends BaseAdapter {
 
 
         List<String> signal = (List<String>) getItem(i);
-        ((TextView) viewSignal.findViewById(R.id.id)).setText(String.format("ID = %s", signal.get(0)));
-        ((TextView) viewSignal.findViewById(R.id.topicId)).setText(String.format("Tên biển báo: %s", signal.get(1)));
-        ((TextView) viewSignal.findViewById(R.id.title)).setText(String.format("Nội dung biển báo: %s", signal.get(2)));
+        ImageView imageView = viewSignal.findViewById(R.id.signal_image);
+        Glide.with(viewSignal).load(signal.get(3)).into(imageView);
+        ((TextView) viewSignal.findViewById(R.id.topicID)).setText(String.format("Nhóm biển báo: %s", signal.get(0)));
+        ((TextView) viewSignal.findViewById(R.id.title)).setText(String.format("Tên biển báo: %s", signal.get(1)));
+        ((TextView) viewSignal.findViewById(R.id.description)).setText(String.format("Nội dung biển báo: %s", signal.get(2)));
 //        ((TextView) viewSignal.findViewById(R.id.descripton)).setText(String.format("Giá %s", signal.get(3)));
         return viewSignal;
     }

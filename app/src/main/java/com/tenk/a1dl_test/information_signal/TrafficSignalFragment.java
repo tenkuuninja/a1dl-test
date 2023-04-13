@@ -1,8 +1,4 @@
 package com.tenk.a1dl_test.information_signal;
-
-import static android.content.Context.MODE_PRIVATE;
-
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +15,6 @@ import androidx.annotation.Nullable;
 import com.tenk.a1dl_test.DBHelper;
 import com.tenk.a1dl_test.R;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TrafficSignalFragment extends Fragment {
@@ -40,7 +31,7 @@ public class TrafficSignalFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_traffic_signal, container, false);
         db = new DBHelper(this.getContext());
-        listSignals = db.getListLaw(1, 1);
+        listSignals = db.getListSignal(1, 1);
         signal_adapter = new Signal_Adapter(listSignals);
 
         listSignal = view.findViewById(R.id.lv_signal);
