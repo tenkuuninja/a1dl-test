@@ -21,6 +21,7 @@ public class Signal_Adapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+
         return listSignals.size();
     }
 
@@ -40,8 +41,6 @@ public class Signal_Adapter extends BaseAdapter {
         if (convertView == null) {
             viewSignal = View.inflate(parent.getContext(), R.layout.listview_signals, null);
         } else viewSignal = convertView;
-
-
         List<String> signal = (List<String>) getItem(i);
         ImageView imageView = viewSignal.findViewById(R.id.signal_image);
         ((TextView) viewSignal.findViewById(R.id.topicID)).setText(String.format("Nhóm biển báo: %s", signal.get(0)));

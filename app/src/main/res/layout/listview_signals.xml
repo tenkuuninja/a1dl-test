@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/signal_image"
-        android:layout_width="372dp"
-        android:layout_height="204dp" />
+        android:layout_width="312dp"
+        android:layout_height="209dp" />
 </LinearLayout>
 
 
