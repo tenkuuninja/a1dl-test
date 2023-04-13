@@ -10,10 +10,12 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDragHandleView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.tenk.a1dl_test.DBHelper;
 import com.tenk.a1dl_test.R;
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class DoTestActivity extends AppCompatActivity {
     BottomSheetDragHandleView bottomSheet;
+    ModalBottomSheet modalBottomSheet;
     ViewPager2 viewPager;
 
     DBHelper db;
@@ -32,7 +35,6 @@ public class DoTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_do_test);
 
 
-        bottomSheet = findViewById(R.id.bottom_sheet);
         TestStore.getInstance().setSubmitted(false);
 
         ImageView btnBack = findViewById(R.id.back_to_list);
@@ -45,27 +47,22 @@ public class DoTestActivity extends AppCompatActivity {
             }
         });
 
+        MaterialButton btnOpenList = findViewById(R.id.btn_open_list);
+        btnOpenList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modalBottomSheet.show(getSupportFragmentManager(), null);
+            }
+        });
+
         TextView submit = findViewById(R.id.submit_test);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showConfirmSubmitDialog();
             }
         });
-
-//        BottomSheetDialogFragment modalBottomSheet = new BottomSheetFragment();
-//        modalBottomSheet.show(getSupportFragmentManager(), BottomSheetFragment.TAG);
-
-//        BottomSheetBehavior standardBottomSheetBehavior = BottomSheetBehavior.from(modalBottomSheet);
-
-//        bottomSheet.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                System.out.println(123);
-//                BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
-//            }
-//        });
-
 
         db = new DBHelper(this);
         List<Question> questions =  db.getListQuestionByTestId(1);
@@ -74,6 +71,15 @@ public class DoTestActivity extends AppCompatActivity {
         viewPager = (ViewPager2) findViewById(R.id.test_pager);
         viewPager.setAdapter(new TestFragmentStateAdapter(this));
         viewPager.setMinimumHeight(600);
+
+        modalBottomSheet = new ModalBottomSheet();
+
+        modalBottomSheet.setListener(new ModalBottomSheet.OnClickListener() {
+            @Override
+            public void onClick(Integer position) {
+                viewPager.setCurrentItem(position);
+            }
+        });
 
     }
 

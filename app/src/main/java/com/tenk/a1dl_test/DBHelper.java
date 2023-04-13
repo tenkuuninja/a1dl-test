@@ -63,17 +63,23 @@ public class DBHelper extends SQLiteAssetHelper {
         db.close();
         return questions;
     }
-
     @SuppressLint("Range")
-    public void getListSignal() {
+    public List<List<String>> getListSignal(int topicId, int title) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select id, topicId, title, description, image from signals", null );
+        Cursor res = db.rawQuery("select id, topicId, title, description, image from signals", null);
         res.moveToFirst();
-        while(res.isAfterLast() == false){
-            System.out.println(res.getString(res.getColumnIndex("title")));
+        List<List<String>> l = new ArrayList<>();
+        while(res.isAfterLast() == false) {
+            List<String> r = new ArrayList<>();
+            r.add(res.getString(res.getColumnIndex("topicId")));
+            r.add(res.getString(res.getColumnIndex("title")));
+            r.add(res.getString(res.getColumnIndex("description")));
+            r.add(res.getString(res.getColumnIndex("image")));
+            l.add(r);
             res.moveToNext();
         }
-        db.close();
+        return l;
+
     }
 
     @SuppressLint("Range")
@@ -97,27 +103,4 @@ public class DBHelper extends SQLiteAssetHelper {
         db.close();
         return l;
     }
-//    List<String> data = new ArrayList<>();
-//    String[] columns = { "vehicleCode" };
-//    Cursor cursor = db.query("laws", columns, null, null, null, null, null);
-//        if (cursor != null)
-//
-//    {
-//        while (cursor.moveToNext()) {
-//            data.add(cursor.getString(0));
-//        }
-//        cursor.close();
-//
-//
-//        String[] columns = {"topicId"};
-//        Cursor cursor1 = db.query("laws", columns, null, null, null, null, null);
-//        if (cursor1 != null) {
-//            while (cursor1.moveToNext()) {
-//                data.add(cursor1.getString(0));
-//            }
-//            cursor1.close();
-//        }
-
-
-//    }
 }
