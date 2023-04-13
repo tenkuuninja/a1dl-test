@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">a1dl-test</string>
+    <string name="app_name">Thi bằng lái</string>
     <string name="title_activity_home">HomeActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -7,6 +7,11 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="close">Đóng</string>
+    <string name="show_result">Xem kết quả</string>
+    <string name="back_to_home">Về trang chủ</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="large_text">
